@@ -1,0 +1,21 @@
+{
+    "swagger": {
+        "outputDirectory": "./build",
+        "entryFile": "./src/index.ts",
+        "host": "localhost:3000",
+        "basePath": "/",
+        "securityDefinitions": {
+            "adminRequired": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "routes": {
+        "authenticationModule": "./src/authentication.ts",
+        "basePath": "/",
+        "entryFile": "./src/controllers/index.ts",
+        "routesDir": "./build"
+    }
+}

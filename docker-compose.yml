@@ -1,0 +1,17 @@
+version: '2'
+services:
+  tsoa-service:
+    build: .
+    command: ./entrypoint.sh "yarn dev"
+    volumes:
+      - .:/code
+    ports:
+      - 3000:3000
+      - 9229:9229
+    environment:
+      NODE_ENV: development
+  mongo:
+    image: mongo:3.2
+    command: mongod --smallfiles
+    logging:
+      driver: none
