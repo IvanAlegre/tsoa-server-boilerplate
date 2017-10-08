@@ -19,7 +19,7 @@ export class Express {
     app.enable('trust proxy')
 
     if (process.env.NODE_ENV === 'development') {
-      app.use('/docs', serve, setup(require('swagger.json')))
+      app.use('/docs', serve, setup(require('../../build/swagger.json')))
       morgan('combined')
     }
 

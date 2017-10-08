@@ -4,7 +4,7 @@ services:
     build: .
     command: ./entrypoint.sh "yarn dev"
     volumes:
-      - .:/code
+      - .:/code:cached
     ports:
       - 3000:3000
       - 9229:9229

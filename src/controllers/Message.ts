@@ -8,6 +8,7 @@ export class MessagesController extends Controller {
 
   @Get('{sender}')
   async getMessages (@Path('sender') sender: string): Promise<BasicResponse> {
+    debugger;
     return { message: 'Hello!' }
   }
 

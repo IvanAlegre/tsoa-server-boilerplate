@@ -2,9 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
-const nodeModules = {
-  'swagger.json': 'commonjs /code/build/swagger.json'
-};
+const nodeModules = {};
 
 fs.readdirSync('node_modules')
   .filter((x) => ['.bin'].indexOf(x) === -1)
