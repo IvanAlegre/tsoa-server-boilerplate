@@ -1,5 +1,6 @@
 import { Route, Controller, Get, Post, Delete, Body, Path, Security } from 'tsoa'
 import * as mailgun from 'mailgun-js'
+import * as mailgen from 'mailgen'
 
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN
 const FROM_EMAIL = `mailgun@${MAILGUN_DOMAIN}`
@@ -17,6 +18,28 @@ interface BasicResponse {
 @Route('public/emails')
 export class EmailsController extends Controller {
 
+  private generateMailBody(inputBody: string): string {
+    const mailGenerator = new mailgen({
+      theme: 'default',
+      product: { name: 'Apiaddicts', link: 'http://apidaysmadrid.es' }
+    })
+
+    return mailGenerator.generate({
+      body: {
+        name: 'Stranger',
+        intro: inputBody,
+        action: {
+          instructions: 'hola!!',
+          button: {
+            color: '#FF0000',
+            text: 'Recoge tus entradas',
+            link: 'http://apidaysmadrid.es'
+          }
+        }
+      }
+    })
+  }
+
   @Post('')
   async postEmail (@Body() email: InputGeneralEmail): Promise<BasicResponse> {
     const messageSender = mailgun({
@@ -27,7 +50,7 @@ export class EmailsController extends Controller {
     await messageSender.send({
       from: FROM_EMAIL,
       subject: email.subject,
-      text: email.body,
+      html: this.generateMailBody(email.body),
       to: email.recipients.join(',')
     })
     return { message: `Email to ${email.recipients.join(', ')} sent` }
