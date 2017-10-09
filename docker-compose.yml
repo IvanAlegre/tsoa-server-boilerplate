@@ -10,6 +10,8 @@ services:
       - 9229:9229
     environment:
       NODE_ENV: development
+      MAILGUN_API_KEY: key-******c5aa
+      MAILGUN_DOMAIN: sandbox****.mailgun.org
   mongo:
     image: mongo:3.2
     command: mongod --smallfiles

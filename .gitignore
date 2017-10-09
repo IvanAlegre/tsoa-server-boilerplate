@@ -56,3 +56,5 @@ doc/
 
 # Developer ssh-keys #
 ssh-keys
+
+docker-compose.override.yml

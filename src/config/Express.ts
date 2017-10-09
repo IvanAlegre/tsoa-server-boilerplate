@@ -20,7 +20,7 @@ export class Express {
 
     if (process.env.NODE_ENV === 'development') {
       app.use('/docs', serve, setup(require('../../build/swagger.json')))
-      morgan('combined')
+      app.use(morgan('combined'))
     }
 
     app.use(bodyParser.urlencoded({ extended: true }))
